@@ -179,13 +179,12 @@ int MyDXBase::Run()
 
 	while (msg.message != WM_QUIT)
 	{
-		// If there are Window messages then process them.
+		//检测消息
 		if (PeekMessage(&msg, 0, 0, 0, PM_REMOVE))
 		{
 			TranslateMessage(&msg);
 			DispatchMessage(&msg);
 		}
-		// Otherwise, do animation/game stuff.
 		else
 		{
 			mTimer.Tick();
@@ -326,7 +325,7 @@ void MyDXBase::CreateCommandObjects()
 
 void MyDXBase::CreateSwapChain()
 {
-	// Release the previous swapchain we will be recreating.
+	
 	mSwapChain.Reset();
 
 
@@ -349,7 +348,7 @@ void MyDXBase::CreateSwapChain()
 
 	mCommandQueue.Get();
 
-	// Note: Swap chain uses queue to perform flush.
+	
 	ThrowIfFailed(mdxgiFactory->CreateSwapChain(mCommandQueue.Get(),&sd,mSwapChain.GetAddressOf()));
 }
 
@@ -401,7 +400,7 @@ void MyDXBase::Set4xMsaaState(bool value)
 	{
 		m4xMsaaState = value;
 
-		// Recreate the swapchain and buffers with new multisample settings.
+		// 重新创建交换链
 		CreateSwapChain();
 		OnResize();
 	}
